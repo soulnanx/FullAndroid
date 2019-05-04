@@ -17,12 +17,12 @@ abstract class DataBaseHelper : RoomDatabase(){
         private var instance: DataBaseHelper? = null
 
         @Synchronized
-        internal fun getInstance(context: Context): DataBaseHelper? {
+        internal fun getInstance(context: Context): DataBaseHelper {
             if (instance == null) {
                 instance =
                     create(context)
             }
-            return instance
+            return instance!!
         }
 
         private fun create(context: Context): DataBaseHelper {

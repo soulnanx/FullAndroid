@@ -13,8 +13,7 @@ class ContactViewModel(private val nav : ContactNavigation) : ViewModel(){
     fun saveContact(contact: Contact){
         ContactRepository().saveContact(
             contact,
-            nav::saveSuccess,
-            nav::saveFailure
+            nav::callback
         )
     }
 

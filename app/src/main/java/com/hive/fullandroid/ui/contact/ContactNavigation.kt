@@ -2,6 +2,5 @@ package com.hive.fullandroid.ui.contact
 
 
 interface ContactNavigation {
-    fun saveSuccess()
-    fun saveFailure(e : Exception)
+    fun callback(isSuccess : Boolean, e : Exception?)
 }
