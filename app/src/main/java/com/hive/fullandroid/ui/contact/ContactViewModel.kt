@@ -5,16 +5,19 @@ import android.arch.lifecycle.ViewModel
 import com.hive.fullandroid.repository.ContactRepository
 import com.hive.fullandroid.repository.local.entity.Contact
 
-class ContactViewModel(private val nav : ContactNavigation) : ViewModel(){
+class ContactViewModel() : ViewModel(){
 
-    var name = MutableLiveData<String>()
-    var email = MutableLiveData<String>()
+    lateinit var nav : ContactNavigation
 
     fun saveContact(contact: Contact){
         ContactRepository().saveContact(
             contact,
-            nav::callback
+            nav::save
         )
+    }
+
+    fun getContacts(){
+        ContactRepository().getContacts(nav::all)
     }
 
 

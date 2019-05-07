@@ -10,8 +10,11 @@ interface ContactDao {
     @Insert
     fun add(contact: Contact)
 
+//    @Query("SELECT * FROM contacts")
+//    fun getAll() : LiveData<List<Contact>>
+
     @Query("SELECT * FROM contacts")
-    fun getAll() : LiveData<List<Contact>>
+    fun getAll() : List<Contact>
 
     @Update
     fun update(contact: Contact)
