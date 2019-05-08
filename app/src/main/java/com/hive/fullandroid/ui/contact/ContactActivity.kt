@@ -1,9 +1,11 @@
 package com.hive.fullandroid.ui.contact
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
@@ -29,6 +31,21 @@ class ContactActivity : AppCompatActivity(), ContactNavigation {
 
     private fun init() {
         setEvents()
+        setObservables()
+    }
+
+    private fun setObservables() {
+        viewModel.contacts.observe(this, Observer {
+            setList(it!!)
+        })
+
+        viewModel.contactsError.observe(this, Observer {
+            showError(it!!)
+        })
+    }
+
+    private fun showError(it: String) {
+        Snackbar.make(binding.recyclerContacts, it, Snackbar.LENGTH_INDEFINITE).show()
     }
 
     private fun setEvents() {
@@ -58,14 +75,5 @@ class ContactActivity : AppCompatActivity(), ContactNavigation {
             Toast.makeText(this@ContactActivity, e.toString(), Toast.LENGTH_SHORT).show()
         }
     }
-
-    override fun all(isSuccess: Boolean, contacts: List<Contact>, e: Exception?) {
-        if (isSuccess){
-            setList(contacts)
-        } else {
-            Toast.makeText(this@ContactActivity, e.toString(), Toast.LENGTH_SHORT).show()
-        }
-    }
-
 
 }
