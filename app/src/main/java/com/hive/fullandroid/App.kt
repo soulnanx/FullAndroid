@@ -2,6 +2,12 @@ package com.hive.fullandroid
 
 import android.app.Application
 import com.facebook.stetho.Stetho
+import com.hive.fullandroid.di.repositoryModule
+import com.hive.fullandroid.di.sharedPreferenceModule
+import com.hive.fullandroid.di.viewModelModule
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.startKoin
 
 class App : Application() {
 
@@ -15,7 +21,6 @@ class App : Application() {
         fun appCtx() : App {
             return instance!!.applicationContext as App
         }
-
     }
 
     override fun onCreate() {
@@ -25,5 +30,14 @@ class App : Application() {
 
     private fun init(){
         Stetho.initializeWithDefaults(this@App)
+
+        startKoin{
+            androidLogger()
+            androidContext(this@App)
+            modules(listOf(viewModelModule,
+                repositoryModule,
+                sharedPreferenceModule)
+            )
+        }
     }
 }
