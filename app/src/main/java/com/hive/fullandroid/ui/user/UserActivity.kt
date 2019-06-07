@@ -1,5 +1,6 @@
 package com.hive.fullandroid.ui.user
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
@@ -28,7 +29,16 @@ class UserActivity : AppCompatActivity() {
     }
 
     private fun init() {
+        setObservers()
         viewModel.getUser()
+
+    }
+
+    private fun setObservers() {
+        viewModel.users.observe(this@UserActivity,
+            Observer {
+                users -> binding.editText.setText(users?.get(0)?.name)
+            })
     }
 
 

@@ -1,7 +1,7 @@
-package com.hive.fullandroid.repository.remote.api
+package com.hive.fullandroid.repository.remote
 
 import com.hive.fullandroid.BuildConfig
-import okhttp3.Interceptor
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -26,7 +26,7 @@ object apiCreator{
     val retrofit = Retrofit.Builder()
         .baseUrl(BuildConfig.API_BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
-//        .addCallAdapterFactory(CoroutineCallAdapterFactory())
+        .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .client(client)
         .build()
 

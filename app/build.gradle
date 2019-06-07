@@ -7,13 +7,13 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 ext {
-    okhttp_version = '3.8.1'
-    retrofit_version = '2.2.0'
-    rxjava_version = '2.1.7'
+    okhttp_version = '3.10.0'
+    retrofit_version = '2.4.0'
     koin_version = "2.0.1"
     lifecycle_version = "1.1.1"
     room_version = "1.1.1"
     coroutines_version = "1.1.0"
+    coroutines_adapter_version = "0.9.2"
 }
 
 android {
@@ -35,12 +35,12 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "API_BASE_URL", "\"http://localhost:1337/\""
+            buildConfigField "String", "API_BASE_URL", "\"http://192.168.25.25:3333/\""
         }
         debug {
             debuggable true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "API_BASE_URL", "\"http://localhost:1337/\""
+            buildConfigField "String", "API_BASE_URL", "\"http://192.168.25.25:3333/\""
         }
 
     }
@@ -59,6 +59,7 @@ dependencies {
 
     //koin
     implementation "org.koin:koin-android-viewmodel:$koin_version"
+
     implementation "android.arch.lifecycle:extensions:$lifecycle_version"
     kapt "android.arch.lifecycle:compiler:$lifecycle_version"
 
@@ -73,11 +74,11 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$coroutines_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$coroutines_adapter_version"
 
     // networking
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
     implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
 
